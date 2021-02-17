@@ -3,7 +3,7 @@ import Header from './components/Header'
 import Tasks from './components/Tasks'
 function App() {
 
-  const [tasks, setState] = useState([
+  const [tasks, setTasks] = useState([
     {
         id:1,
         text:'Meeting with docktor',
@@ -24,10 +24,13 @@ function App() {
     }
 ])
 
+const deleteTask = (id) => {
+  setTasks(tasks.filter((task) => task.id!==id));
+}
   return (
     <div className="container">
      <Header />
-     <Tasks tasks={tasks} />
+     <Tasks tasks={tasks} onDelete={deleteTask}/>
     </div>
   );
 }
