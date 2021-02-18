@@ -3,7 +3,8 @@ import Header from './components/Header'
 import Tasks from './components/Tasks'
 import AddForm from './components/AddTask'
 function App() {
-
+  
+  const [showAddTask, setShowTask ]=useState(false);
   const [tasks, setTasks] = useState([
     {
         id:1,
@@ -38,10 +39,14 @@ const addTask = (task)=>{
   const newTask = {id,...task}
   setTasks([...tasks, newTask]);
 }
+
+const addButtonToogle=()=>{
+  setShowTask(!showAddTask)
+}
   return (
     <div className="container">
-     <Header />
-     <AddForm addTask={addTask}/>
+     <Header addOn={addButtonToogle}/>
+     { showAddTask && <AddForm addTask={addTask} taskToggle={showAddTask}/>}
      {tasks.length >0 ? (<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/>) : 'No task to show'}
     </div>
   );
